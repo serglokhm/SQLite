@@ -192,7 +192,7 @@ public enum SQLiteError: Error {
         }
     }
     
-    public func getRow(table:String,fromCol:String,whereCol:String,equalTo:Int) -> String {
+    @objc public func getRow(table:String,fromCol:String,whereCol:String,equalTo:Int) -> String {
         self.checkConnection()
         var rowStr = ""
         var SqlStatement : OpaquePointer? = nil
@@ -210,7 +210,7 @@ public enum SQLiteError: Error {
         sqlite3_finalize(SqlStatement)
         return rowStr
     }
-    public func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int) -> [String]? {
+    @objc public func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int) -> [String]? {
         self.checkConnection()
         var allRows : [String]?
         var SqlStatement : OpaquePointer? = nil
@@ -242,7 +242,7 @@ public enum SQLiteError: Error {
         }
     }
     
-    public func getRows(query:String) -> [String:String]? {
+    @objc public func getRows(query:String) -> [String:String]? {
         self.checkConnection()
         var allRows : [String:String] = [:]
         var SqlStatement : OpaquePointer? = nil
@@ -263,7 +263,7 @@ public enum SQLiteError: Error {
         return allRows
     }
     
-    public func getRows(query:String,numberOfCol:Int) -> [[String]] {
+    @objc public func getRows(query:String,numberOfCol:Int) -> [[String]] {
         self.checkConnection()
         var allRows : [[String]] = [[]]
         var singleRow : [String] = []
@@ -296,7 +296,7 @@ public enum SQLiteError: Error {
         return allRows
     }
     
-    public func getRowsWithCol(query:String,numberOfCol:Int) -> [NSMutableDictionary] {
+    @objc public func getRowsWithCol(query:String,numberOfCol:Int) -> [NSMutableDictionary] {
         self.checkConnection()
         var allRows : [NSMutableDictionary] = []
         var singleRow : NSMutableDictionary = [:]
@@ -336,7 +336,7 @@ public enum SQLiteError: Error {
      //Here rows in an array of NSMutableDictionary
      Eache element contains one row and each key value pair is column name and value in NSMutableDictionary
      */
-    public func getRowsWithCol(query:String) -> [NSMutableDictionary] {
+    @objc public func getRowsWithCol(query:String) -> [NSMutableDictionary] {
         self.checkConnection()
         var allRows : [NSMutableDictionary] = []
         var singleRow : NSMutableDictionary = [:]
@@ -370,7 +370,7 @@ public enum SQLiteError: Error {
         return allRows
     }
     
-    public func getColumn(query:String) -> [String] {
+    @objc public func getColumn(query:String) -> [String] {
         self.checkConnection()
         var columns : [String] = []
         var SqlStatement : OpaquePointer? = nil
@@ -388,7 +388,7 @@ public enum SQLiteError: Error {
         sqlite3_finalize(SqlStatement)
         return columns
     }
-    public func getRow(query:String,numberOfCol:Int) -> [String] {
+    @objc public func getRow(query:String,numberOfCol:Int) -> [String] {
         self.checkConnection()
         var singleRow : [String] = []
         var SqlStatement : OpaquePointer? = nil
@@ -413,7 +413,7 @@ public enum SQLiteError: Error {
         sqlite3_finalize(SqlStatement)
         return singleRow
     }
-    public func getValue(query:String) -> String? {
+    @objc public func getValue(query:String) -> String? {
         self.checkConnection()
         var value : String?
         var SqlStatement : OpaquePointer? = nil
@@ -432,7 +432,7 @@ public enum SQLiteError: Error {
     }
     //============================================================
     /**Execute query and return first value from query result */
-    public func getSingleElement(sqlStr:String)->String{
+    @objc public func getSingleElement(sqlStr:String)->String{
         self.checkConnection()
         var valueStr = ""
         var statement : OpaquePointer? = nil
@@ -453,7 +453,7 @@ public enum SQLiteError: Error {
         return valueStr
     }
     //============================================================
-    public func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int,whereCol2:String,equalTo2:String) -> [String]? {
+    @objc ublic func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int,whereCol2:String,equalTo2:String) -> [String]? {
         self.checkConnection()
         var allRows : [String]?
         var SqlStatement : OpaquePointer? = nil
@@ -485,7 +485,7 @@ public enum SQLiteError: Error {
         }
     }
     
-    public func insertTable(_ contentValues: NSMutableDictionary,_ table:String ,_ isIgnoreConflict: Bool)->Bool
+    @objc public func insertTable(_ contentValues: NSMutableDictionary,_ table:String ,_ isIgnoreConflict: Bool)->Bool
     {
         self.checkConnection()
         var query = " \(table) ("
@@ -524,7 +524,7 @@ public enum SQLiteError: Error {
         return true;
     }
     
-    public func insertTable(_ contentValues: Dictionary<String, Any>,_ table:String ,_ isIgnoreConflict: Bool)->Bool
+    @objc public func insertTable(_ contentValues: Dictionary<String, Any>,_ table:String ,_ isIgnoreConflict: Bool)->Bool
     {
         self.checkConnection()
         var query = " \(table) ("
@@ -559,7 +559,7 @@ public enum SQLiteError: Error {
         return true;
     }
     
-    public func insert(_ table:String,_ values:[String:Any]) {
+    @objc public func insert(_ table:String,_ values:[String:Any]) {
         var query = "INSERT OR REPLACE INTO \(table)"
         var col = "("
         var val = "("
@@ -578,7 +578,7 @@ public enum SQLiteError: Error {
         query = query + col + "VALUES" + val
         self.execute(query: query)
     }
-    public func delete(_ table:String,_ conditions:[String:Any]){
+    @objc public func delete(_ table:String,_ conditions:[String:Any]){
         var query = "DELETE FROM \(table) WHERE "
         for item in conditions{
             if let value = item.value as? String{
@@ -593,7 +593,7 @@ public enum SQLiteError: Error {
         query.removeLast()
         self.execute(query: query)
     }
-    public func rows(_ tableName : String)->[[String:Any]]{
+    @objc public func rows(_ tableName : String)->[[String:Any]]{
         self.checkConnection()
         let query = "SELECT * FROM \(tableName)"
         var allRows : [[String:Any]] = []
@@ -634,7 +634,7 @@ public enum SQLiteError: Error {
     }
     
     
-    public func updateTable(_ contentValues:NSMutableDictionary ,_ table: String ,_ whereClause: String)->Bool
+    @objc public func updateTable(_ contentValues:NSMutableDictionary ,_ table: String ,_ whereClause: String)->Bool
     {
         self.checkConnection()
         var query = "UPDATE \(table) SET "
@@ -653,14 +653,14 @@ public enum SQLiteError: Error {
         
         return self.execute(queryString: query)
     }
-    public  func enableKeyValuePairStorage() {
+    @objc public  func enableKeyValuePairStorage() {
         SQLite.shared.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
     }
     @objc(value:key:)  public func store(value : String ,key : String) {
         SQLite.shared.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)','\(value)')")
     }
     
-    public func retrive(key:String) -> String? {
+    @objc public func retrive(key:String) -> String? {
         self.checkConnection()
         var SqlStatement : OpaquePointer? = nil
         let query = """
@@ -677,7 +677,7 @@ public enum SQLiteError: Error {
         sqlite3_finalize(SqlStatement)
         return nil
     }
-    public func getString(key:String) -> String {
+    @objc public func getString(key:String) -> String {
         self.checkConnection()
         var SqlStatement : OpaquePointer? = nil
         let query = """
