@@ -523,42 +523,6 @@ public enum SQLiteError: Error {
         //  self.endTransaction()
         return true;
     }
-    
-    @objc public func insertTable(_ contentValues: Dictionary<String, Any>,_ table:String ,_ isIgnoreConflict: Bool)->Bool
-    {
-        self.checkConnection()
-        var query = " \(table) ("
-        for items in contentValues{
-            query = query + (items.key)
-            query = query + ","
-        }
-        query.removeLast()
-        query = query + ") VALUES("
-        for items in contentValues{
-            let keyStr = items.key
-            if(keyStr.last == "N"){
-                query = query + "\(items.value)"
-            }else{
-                query = query + "'\(items.value)'"
-            }
-            query = query + ","
-        }
-        query.removeLast()
-        query = query + ")"
-        if(isIgnoreConflict)
-        {
-            query = "INSERT OR REPLACE INTO " + query
-            self.execute(query: query)
-        }
-        else
-        {
-            query = "INSERT INTO " + query
-            self.execute(query: query)
-        }
-        //  self.endTransaction()
-        return true;
-    }
-    
     @objc public func insert(_ table:String,_ values:[String:Any]) {
         var query = "INSERT OR REPLACE INTO \(table)"
         var col = "("
