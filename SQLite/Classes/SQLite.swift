@@ -245,8 +245,7 @@ public enum SQLiteError: Error {
     @objc public func getRows(query:String) -> [String:String]? {
         self.checkConnection()
         var allRows : [String:String] = [:]
-        allRows["hello"] = "item 1"
-        return allRows
+        allRows["XXXXXXX"] = "YYYYYYY"
         var SqlStatement : OpaquePointer? = nil
         if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
         {
