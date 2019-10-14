@@ -93,7 +93,7 @@ public enum SQLiteError: Error {
      SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
      ````
      */
-    @objc(query:) public func execute(query:String){
+    @objc public func execute(query:String){
         self.checkConnection()
         var statement : OpaquePointer? = nil
         if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK
@@ -122,7 +122,7 @@ public enum SQLiteError: Error {
      let isExecuted = SQLite.shared.execute(queryString:rawQuery)
      ````
      */
-    @objc(queryString:) public func execute(queryString:String)->Bool{
+    @objc public func execute(queryString:String)->Bool{
         var status = false
         self.checkConnection()
         var statement : OpaquePointer? = nil
