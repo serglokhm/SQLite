@@ -50,7 +50,7 @@ public enum SQLiteError: Error {
     /**
      Function to close the connection to working database.
      */
-    public func closeDb(){
+    @objc public func closeDb(){
         if #available(iOS 8.2, *) {
             if sqlite3_close_v2(self.db) == SQLITE_DONE{
                 print("Database with name " + self.databaseName + " Closed")
@@ -64,7 +64,7 @@ public enum SQLiteError: Error {
     /**
      Function to get the connection pointer to Database with current databaseName
      */
-    public func getDB()->OpaquePointer?{
+    @objc public func getDB()->OpaquePointer?{
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,appropriateFor:nil,create: false).appendingPathComponent(self.databaseName + ".sqlite")
         var databaseConnectionPointer : OpaquePointer? = nil
         if sqlite3_open_v2(fileURL.path, &databaseConnectionPointer, SQLITE_OPEN_CREATE|SQLITE_OPEN_READWRITE|SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK{
