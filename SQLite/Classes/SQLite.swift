@@ -453,7 +453,7 @@ public enum SQLiteError: Error {
         return valueStr
     }
     //============================================================
-    @objc ublic func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int,whereCol2:String,equalTo2:String) -> [String]? {
+    @objc public func getRows(table:String,fromCol:String,whereCol:String,equalTo:Int,whereCol2:String,equalTo2:String) -> [String]? {
         self.checkConnection()
         var allRows : [String]?
         var SqlStatement : OpaquePointer? = nil
